@@ -10,25 +10,35 @@ export class CurrencyComponent implements OnInit {
 
   currencyRates: any;
   rateList: any;
+  currentCurrency: number;
+  newCurrency: number;
+  exchangeRate: number;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getCurrencyRates().subscribe(rates => {
       this.currencyRates = rates;
-      console.log(this.currencyRates);
       this.rateList = Object.keys(this.currencyRates.rates)
         .map(key => ({type: key, value: this.currencyRates.rates[key]}))
         .sort((a, b) => a.type.localeCompare(b.type));
-      console.log(this.rateList);
+      this.currentCurrency = this.rateList[0].value;
+      this.newCurrency = this.rateList[0].value;
+      this.exchangeRate = 1;
     });
   }
 
-  // myClick(){
-  //   this.data.getCurrencyRates().subscribe(rates => {
-  //     this.currencyRates = rates;
-  //     console.log(this.currencyRates);
-  //   });
-  // }
+  currentCurrencyChangeEvent(newCurrentCurrency){
+    this.currentCurrency = newCurrentCurrency;
+    this.computeExchangeRate();
+  }
 
+  newCurrencyChangeEvent(newNewCurrency){
+    this.newCurrency = newNewCurrency;
+    this.computeExchangeRate();
+  }
+
+  computeExchangeRate(){
+    this.exchangeRate = this.newCurrency / this.currentCurrency;
+  }
 }

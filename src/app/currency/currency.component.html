@@ -1,17 +1,17 @@
 <div>
   Current Currency:
-  <select *ngIf="currencyRates">
+  <select *ngIf="currencyRates" #currentCurrency (change)="currentCurrencyChangeEvent(currentCurrency.value)">
     <option *ngFor="let currencyRate of rateList" [value]="currencyRate.value">{{currencyRate.type}}</option>
   </select>
 </div>
 
 <div>
   New Currency:
-  <select *ngIf="currencyRates">
+  <select *ngIf="currencyRates"  #newCurrency (change)="newCurrencyChangeEvent(newCurrency.value)">
       <option *ngFor="let currencyRate of rateList" [value]="currencyRate.value">{{currencyRate.type}}</option>
     </select>
 </div>
 <div>
   Exchange Rate:
-  <input/>
+  <input [value]="exchangeRate" readonly="readonly"/>
 </div>
