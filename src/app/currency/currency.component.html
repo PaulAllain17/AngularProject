@@ -1,23 +1,15 @@
 <div>
   Current Currency:
-  <select>
-      <option value="CAD">Canadian Dollar</option>
-      <option value="CHF">Swiss Franc</option>
-      <option value="GBP">Pound Sterling</option>
-      <option value="USD">US Dollar</option>
-      <option value="JPY">Japanese Yen</option>
+  <select *ngIf="currencyRates">
+    <option *ngFor="let currencyRate of rateList" [value]="currencyRate.value">{{currencyRate.type}}</option>
   </select>
 </div>
 
 <div>
   New Currency:
-  <select>
-      <option value="CAD">Canadian Dollar</option>
-      <option value="CHF">Swiss Franc</option>
-      <option value="GBP">Pound Sterling</option>
-      <option value="USD">US Dollar</option>
-      <option value="JPY">Japanese Yen</option>
-  </select>
+  <select *ngIf="currencyRates">
+      <option *ngFor="let currencyRate of rateList" [value]="currencyRate.value">{{currencyRate.type}}</option>
+    </select>
 </div>
 <div>
   Exchange Rate:
