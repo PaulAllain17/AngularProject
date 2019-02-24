@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../dataService/data.service';
+import { MathService } from '../mathService/math.service';
 
 @Component({
   selector: 'app-currency',
@@ -14,7 +15,7 @@ export class CurrencyComponent implements OnInit {
   newCurrency: number;
   exchangeRate: number;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private math: MathService) { }
 
   ngOnInit() {
     this.data.getCurrencyRates().subscribe(rates => {
@@ -30,15 +31,11 @@ export class CurrencyComponent implements OnInit {
 
   currentCurrencyChangeEvent(newCurrentCurrency){
     this.currentCurrency = newCurrentCurrency;
-    this.computeExchangeRate();
+    this.exchangeRate = this.math.computeExchangeRate(this.newCurrency, this.currentCurrency);
   }
 
   newCurrencyChangeEvent(newNewCurrency){
     this.newCurrency = newNewCurrency;
-    this.computeExchangeRate();
-  }
-
-  computeExchangeRate(){
-    this.exchangeRate = this.newCurrency / this.currentCurrency;
+    this.exchangeRate = this.math.computeExchangeRate(this.newCurrency, this.currentCurrency);
   }
 }
