@@ -4,14 +4,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DataService } from './data.service';
 
 describe('DataService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule
-    ]
-  }));
+  let service: DataService;
+
+  beforeEach(() => {TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ]
+    });
+    service = TestBed.get(DataService);
+  });
 
   it('should be created', () => {
-    const service: DataService = TestBed.get(DataService);
     expect(service).toBeTruthy();
   });
 });
